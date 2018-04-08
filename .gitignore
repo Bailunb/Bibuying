@@ -1,3 +1,11 @@
 .idea/
 db.sqlite3
 *.pyc
+Bibuying/__pycache__/
+BibuyingWeb/__pycache__/
+BibuyingWeb/migrations/__pycache__/
+doc/
+templates/
+
+# cww97
+BibuyingData/web.html
