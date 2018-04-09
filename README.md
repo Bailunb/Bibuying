@@ -15,7 +15,8 @@ Deadline：4月15日。
 
 ## 项目环境
 
-python 3.6 (Anaconda, windows 64)
+windows 64
+Anaconda(py3.6)
 pycharm
 
 ## 数据来源
@@ -32,7 +33,23 @@ pycharm
 
 `3 * 100 * 50 = 15000 首歌`
 
-数据量应该符合要求的
+数据量应该符合要求的10k
+
+流程：
+
+1. 获取歌手id表，存入`artist_id.txt`内 
+2. 获取每个歌手的50首热门歌曲id 
+3. 根据歌曲id爬歌词保存json文件
+
+### 文件说明
+
+`main.py`：主要过程代码都在这
+
+`artist_id.py`: 歌手id文件，为`get_artist_id()`写出的文件
+
+`web.html`：爬取网页源码，先存在这看一眼，该文件未push
+
+### 基本操作
 
 定义`get_soup()`爬取html：
 ```python
@@ -67,6 +84,22 @@ pattern = re.compile(r'id=\d+')
 
 先睡觉= =
 
+直接爬`http://music.163.com/#/artist?id=6452`有个问题，爬出来一堆js脚本，这个动态加载的页面
+
+知乎上[这里](https://www.zhihu.com/question/21471960)发现个技巧，右击检查元素发现
+
+![](doc/pic/song_id.png)
+
+这里有个请求可以得到歌单，其header如下
+
+    Request URL: http://music.163.com/artist?id=6452
+    Request Method: GET
+    Status Code: 200 OK
+    Remote Address: 223.252.199.66:80
+    Referrer Policy: no-referrer-when-downgrade
+    
+emmmmm，把`#`扔掉就完事了，busy，晚上再说
+
 // 待续
 
 ——by cww
@@ -95,9 +128,13 @@ pattern = re.compile(r'id=\d+')
 
 ## 参考文献
 
+[NetCloud Music](http://music.163.com)
+
 [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html)
 
 [python爬取网易云歌词](https://www.cnblogs.com/Beyond-Ricky/p/6757954.html)
+
+[python 爬去js生成的网页内容](https://www.zhihu.com/question/21471960)
 
 [ElasticSearch py](https://pypi.python.org/pypi/elasticsearch/2.2.0)
 
