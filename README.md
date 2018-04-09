@@ -82,9 +82,7 @@ pattern = re.compile(r'id=\d+')
 
 ### 根据id获取歌单
 
-先睡觉= =
-
-直接爬`http://music.163.com/#/artist?id=6452`有个问题，爬出来一堆js脚本，这个动态加载的页面
+直接爬`http://music.163.com/#/artist?id=3681`有个问题，爬出来一堆js脚本，这个动态加载的页面
 
 知乎上[这里](https://www.zhihu.com/question/21471960)发现个技巧，右击检查元素发现
 
@@ -92,13 +90,19 @@ pattern = re.compile(r'id=\d+')
 
 这里有个请求可以得到歌单，其header如下
 
-    Request URL: http://music.163.com/artist?id=6452
+    Request URL: http://music.163.com/artist?id=3681
     Request Method: GET
     Status Code: 200 OK
     Remote Address: 223.252.199.66:80
     Referrer Policy: no-referrer-when-downgrade
     
-emmmmm，把`#`扔掉就完事了，busy，晚上再说
+emmmmm，把`#`扔掉就完事了
+
+这里就面临一个选择，是把id存在一个本地文件里然后一行一行读来操作或者是直接在这里做到底，歌手歌名歌词搞完。
+
+对接json文件，封面 + 歌词 +音频链接+歌名+歌手名
+
+封面有个图片url
 
 // 待续
 
