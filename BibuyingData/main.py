@@ -6,10 +6,7 @@ from bs4 import BeautifulSoup
 import re
 import get_ips
 
-ips = [
-	'222.95.37.169:48785'
-]
-
+ips = ['222.95.37.169:48785']
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
                          'Chrome/51.0.2704.63 Safari/537.36', "Authorization": get_ips.auth}
 
@@ -18,7 +15,6 @@ def get_soup(web_url):
 	# html_file = open("web.html", "w", encoding='utf-8')
 	if not 'lyric' in web_url: print(web_url)
 	proxy = {"http": "http://" + ips[0], "https": "https://" + ips[0]}
-	
 	req = requests.get(url=web_url, headers=headers, proxies=proxy)
 	soup = BeautifulSoup(req.text, 'lxml')
 	# html_file.write(soup.prettify())
