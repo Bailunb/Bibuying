@@ -1,24 +1,27 @@
 import json
-import urllib.request
 import requests
 import jieba
 import os.path
 from bs4 import BeautifulSoup
 import re
+import get_ips
+
+ips = [
+	'222.95.37.169:48785'
+]
+
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                         'Chrome/51.0.2704.63 Safari/537.36'}
+                         'Chrome/51.0.2704.63 Safari/537.36', "Authorization": get_ips.auth}
 
 
 def get_soup(web_url):
-	html_file = open("web.html", "w", encoding='utf-8')
-	print(web_url)
+	# html_file = open("web.html", "w", encoding='utf-8')
+	if not 'lyric' in web_url: print(web_url)
+	proxy = {"http": "http://" + ips[0], "https": "https://" + ips[0]}
 	
-	req = urllib.request.Request(url=web_url, headers=headers)
-	# print(req)
-	web_page = urllib.request.urlopen(req)
-	data = web_page.read()
-	soup = BeautifulSoup(data, 'lxml')
-	html_file.write(soup.prettify())
+	req = requests.get(url=web_url, headers=headers, proxies=proxy)
+	soup = BeautifulSoup(req.text, 'lxml')
+	# html_file.write(soup.prettify())
 	return soup
 
 
@@ -41,26 +44,30 @@ def get_artists():
 		ans.append(int(line))
 	return ans
 	
-	# -------------------------------------------------------------------------------------------
+	# ------------------------------------------------------------------------------------
 
 
 def get_lyric(song_id):
 	lyric_url = 'http://music.163.com/api/song/lyric?id=%s&lv=1&kv=1&tv=-1' % str(song_id)
-	lyric = requests.get(lyric_url).text
-	j = json.loads(lyric)
+	lyric = get_soup(lyric_url).text
 	try:
-		lrc = j['lrc']['lyric']
-		pat = re.compile(r'\[.*\]')
-		return re.sub(pat, "", lrc).strip()
-	except KeyError as e:
-		return ""
+		j = json.loads(lyric)
+		try:
+			lrc = j['lrc']['lyric']
+			pat = re.compile(r'\[.*\]')
+			return re.sub(pat, "", lrc).strip()
+		except KeyError:
+			return ""
+	except json.decoder.JSONDecodeError:
+		return ''
 
 
 def get_pic(song_id):
 	song_url = 'http://music.163.com/song?id=%s' % str(song_id)
-	soup = get_soup(song_url).find('script', attrs={"type": "application/ld+json"}).text
+	soup = get_soup(song_url)
+	st = soup.find('script', attrs={"type": "application/ld+json"}).text
 	pat = re.compile(r'\"images\": \[.*\]')
-	return pat.findall(soup)[0][12:-2]
+	return pat.findall(st)[0][12:-2]
 
 
 def get_words(lyric):
@@ -109,11 +116,11 @@ def append_50music(artist_id):
 def main():
 	# init_artist_id()
 	artists = get_artists()
-	for i in range(27, 301):
+	for i in range(297, 301):
 		print('i = %d' % i, end=' ')
-		jieba.initialize()
 		append_50music(artists[i])
 	
 
 if __name__ == '__main__':
 	main()
+	# print(get_lyric(360941))
