@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Details {% endblock %}
+
+{% block content %}
+    <section>
+        <h5>{{ song_name }}</h5>
+
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src={{ play_src }}></iframe>
+
+        <p><span class="image left"><img src={{ pic_url }} alt="" /></span>{{ song_lyric }}
+        </p>
+
+    </section>
+{% endblock %}

@@ -36,7 +36,7 @@ Deadline：4月15日。
 
 // this part is edited by cww
 
-从网易云爬歌手的热门50首歌
+从[网易云](http://music.163.com/)爬歌手的热门50首歌
 
 分类分别为
 
@@ -63,6 +63,8 @@ Deadline：4月15日。
 `artist_id.py`: 歌手id文件，为`get_artist_id()`写出的文件
 
 `web.html`：爬取网页源码，先存在这看一眼，该文件未push
+
+`get_ips.py`：ip代理运营商提供的接口，自己机子被网易云列入黑名单了
 
 ### 基本操作
 

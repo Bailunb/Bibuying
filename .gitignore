@@ -1,5 +1,4 @@
 .idea/
-db.sqlite3
 *.pyc
 Bibuying/__pycache__/
 BibuyingWeb/__pycache__/
