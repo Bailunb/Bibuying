@@ -22,7 +22,8 @@ def details(request):
 	song_id = info['song_id']
 	song_name = info['song_name']
 	song_lyric = info['song_lyric']
+	song_lyric = song_lyric.split('\n')
 	pic_url = info['pic_url']
-	play_src = "//music.163.com/outchain/player?type=2&id=%s&auto=1&height=66" % song_id
+	play_src = "//music.163.com/outchain/player?type=2&id=%s&auto=0&height=66" % song_id
 	# print(song_lyric)
 	return render(request, 'details.html', locals())

@@ -2,14 +2,55 @@
 {% load static %}
 {% block title %} Details {% endblock %}
 
+
 {% block content %}
-    <section>
+    <div class="content1">
+    <div class="left">
+        <span class="image1"><img src={{ pic_url }} alt=""  height="200" width="200"></span>
+
+    </div>
+        <div class="right">
+            <section>
         <h5>{{ song_name }}</h5>
 
         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src={{ play_src }}></iframe>
 
-        <p><span class="image left"><img src={{ pic_url }} alt="" /></span>{{ song_lyric }}
-        </p>
+                <p>
+                    {% for line in song_lyric %}
+                        {{ line }}
+                        <br>
+                    {% endfor %}
+            </p>
 
     </section>
+        </div>
+
+    </div>
+
 {% endblock %}
+
+<style type="text/css">
+.content {
+    display: block;
+    font-size:14px;
+    color:#FF0000;
+    margin:100px;
+    position: relative;
+}
+    .left{
+        display: block;
+        width: 35%;
+        position: absolute;
+        left:0;
+        float: left;
+    }
+    .right{
+        display: block;
+        width: 65%;
+        position: absolute;
+        right:0;
+    }
+    .image{
+
+    }
+</style>
