@@ -8,11 +8,13 @@
 <div class="content">
     <h1><a href="#">必不应</a></h1>
     <p> 网易云中文top300歌手的歌</p>
-    <ul class="actions">
-        <input type="text" name="demo-name" id="demo-name" value="" placeholder="Animals?" />
-        <br>
-        <li><a href="/res/" class="button special icon fa-download">Search</a></li>
-    </ul>
+    <form action="/res/" method="get">
+        <ul class="actions">
+            <input type="text" name="keywords" id="demo-name" value="" placeholder="Animals?" />
+            <br>
+            <li><input type="submit" class="button special icon fa-download" value="Search"></li>
+        </ul>
+    </form>
 </div>
 <div class="image phone"><div class="inner"><img src={% static "images/screen.jpg"%} alt="" /></div></div>
 </section>

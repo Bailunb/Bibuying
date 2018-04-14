@@ -6,21 +6,16 @@
 
 <section id="two" class="wrapper">
     <div class="inner alt">
+        {% for song in music %}
+            <section class="spotlight">
 
-        <section class="spotlight">
-            {% for song in music %}
-                <a href="/details/">
                     <div class="image image_search"><img src={{ song.pic_url }} alt="" /></div>
-
-                    <div class="content">
-                        <h3>{{ song.song_name }}</h3>
+                <div class="content">
+                        <a href={{ song.detail_url }}><h3>{{ song.song_name }}</h3></a>
                         <p>{{ song.song_lyric }}</p>
                     </div>
-                </a>
-            {% endfor %}
-        </section>
-
+            </section>
+        {% endfor %}
     </div>
 </section>
-
 {% endblock %}
