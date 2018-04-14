@@ -13,8 +13,16 @@ def index(request):
 
 
 def search_result(request):
-	
-	return render(request, 'search_result.html')
+	songs = open('BibuyingWeb/static/search_result.txt').read().split()
+	print(songs)
+	music = []
+	for song in songs:
+		# print(song)
+		file_name = 'SongsData/%s.json' % str(song)
+		info = json.load(open(file_name, 'rb'))
+		info['song_lyric'] = info['song_lyric'][:100] + '...'
+		music.append(info)
+	return render(request, 'search_result.html', locals())
 
 
 def details(request):
