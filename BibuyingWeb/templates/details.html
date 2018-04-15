@@ -11,18 +11,17 @@
     </div>
         <div class="right">
             <section>
-        <h2>{{ info.song_name }}</h2>
+                <h2>{{ info.song_name }}</h2>
 
-        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src={{ play_src }}></iframe>
-
+                <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src={{ play_src }}></iframe>
                 <p>
                     {% for line in song_lyric %}
                         {{ line }}
                         <br>
                     {% endfor %}
-            </p>
+                </p>
 
-    </section>
+            </section>
         </div>
 
     </div>
@@ -51,6 +50,5 @@
         right:0;
     }
     .image{
-
     }
 </style>

@@ -28,9 +28,10 @@ Deadline：4月15日。
 
 ## 项目环境
 
-- windows 64
+- ubuntu 16.04
 - Anaconda(py3.6)
-- pycharm
+- pycharm (- -)
+- django 1.11
 
 ## 数据来源
 
@@ -265,9 +266,30 @@ def get_soup(web_url):
 
 核心功能两个页面，搜索结果目录页和details页，有心情再搞个搜索主页
 
-// add here
+使用python的django框架，
 
-——by sjj
+###　搜索界面
+
+
+
+![](doc/pic/web/home.png)
+
+### 搜索结果页面
+
+由于检索的建立和索引的查找都是使用`java`实现，在写这部分的时候`python`调用`java`的模块还在调试，这里是本地写了一个`search_result.txt`, 该页面直接读取里面的`song_id`然后到`SongsData`中读取相应的`json`。
+
+后面java索引直接操作`search_result.txt`，当然直接返回一个`list`是最优雅的，等调通了再做优化吧。
+
+![](doc/pic/web/res.png)
+
+### 详情页面
+
+传进一个song_id, 建立页面
+
+![](doc/pic/web/details.png)
+
+
+——by cww, sjj
 
 ## 后记
 

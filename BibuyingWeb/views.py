@@ -8,7 +8,7 @@ def index(request):
 
 def search_result(request):
 	words = request.GET['words']
-	print('words = ', words)
+	# print('words = ', words)
 	# add queries here
 	# : music_idx.query(words) # this operation edit 'search_result.txt'
 
