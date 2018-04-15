@@ -114,12 +114,12 @@ public class Indexer {
 	 * 测试创建索引
 	 */
 	public static void main(String[] args) {
-		//索引输出目录
-//		String indexDir="E:\\Bibuying";
-		String indexDir="C:\\Users\\SuperTayson\\Desktop\\Bibuying\\DataIndex";
-		//读取数据的路径
+		//�������Ŀ¼
+		//		String indexDir="E:\\Bibuying";
+		String indexDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/DataIndex";
+		//��ȡ���ݵ�·��
 //		String dataDir="E:\\Bibuying\\SongsData";
-		String dataDir="C:\\Users\\SuperTayson\\Desktop\\Bibuying\\SongsData";
+		String dataDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/SongsData";
 
 		Indexer indexer=null;
 		int numIndexed=0;
@@ -137,6 +137,37 @@ public class Indexer {
 			}
 		}
 		long end=System.currentTimeMillis();
-		System.out.println("创建索引："+numIndexed+" 个文件 花费了"+(end-start)+" 毫秒");
+		System.out.println("����������"+numIndexed+" ���ļ� ������"+(end-start)+" ����");
+	}
+	public void fun11(){
+		System.out.println("33333333333333333333");
+	}
+
+
+	public void run(){
+
+//		String indexDir="E:\\Bibuying";
+		String indexDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/DataIndex";
+		//��ȡ���ݵ�·��
+//		String dataDir="E:\\Bibuying\\SongsData";
+		String dataDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/SongsData";
+
+		Indexer indexer=null;
+		int numIndexed=0;
+		long start=System.currentTimeMillis();
+		try {
+			indexer = new Indexer(indexDir);
+			numIndexed=indexer.index(dataDir);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally{
+			try {
+				indexer.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		long end=System.currentTimeMillis();
+		System.out.println("����������"+numIndexed+" ���ļ� ������"+(end-start)+" ����");
 	}
 }
