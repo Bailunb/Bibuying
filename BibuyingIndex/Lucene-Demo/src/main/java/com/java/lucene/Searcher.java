@@ -17,7 +17,7 @@ import org.apache.lucene.store.FSDirectory;
 
 public class Searcher {
 
-    static String search1="¶Å";
+    static String search1="æœ";
 
     public void fun2(String x){
         search1=x;
@@ -25,20 +25,20 @@ public class Searcher {
 
 	public static void search(String indexDir,String q)throws Exception{
 		Directory dir=FSDirectory.open(Paths.get(indexDir));
-		//´´½¨Ë÷Òı¶ÁÈ¡Æ÷
+		//åˆ›å»ºç´¢å¼•è¯»å–å™¨
 		IndexReader reader=DirectoryReader.open(dir);
-		//´´½¨Ë÷Òı²éÑ¯Æ÷
+		//åˆ›å»ºç´¢å¼•æŸ¥è¯¢å™¨
 		IndexSearcher is=new IndexSearcher(reader);
-		// ±ê×¼·Ö´ÊÆ÷
+		// æ ‡å‡†åˆ†è¯å™¨
 		Analyzer analyzer=new StandardAnalyzer(); 
-		//¿ªÊ¼²éÑ¯½âÎö
+		//å¼€å§‹æŸ¥è¯¢è§£æ
 		QueryParser parser=new QueryParser("contents", analyzer);
 		Query query=parser.parse(q);
 		
 		long start=System.currentTimeMillis();
 		TopDocs hits=is.search(query, 10);
 		long end=System.currentTimeMillis();
-		System.out.println("Æ¥Åä "+q+" £¬×Ü¹²»¨·Ñ"+(end-start)+"ºÁÃë"+"²éÑ¯µ½"+hits.totalHits+"¸ö¼ÇÂ¼");
+		System.out.println("åŒ¹é… "+q+" ï¼Œæ€»å…±èŠ±è´¹"+(end-start)+"æ¯«ç§’"+"æŸ¥è¯¢åˆ°"+hits.totalHits+"ä¸ªè®°å½•");
 		for(ScoreDoc scoreDoc:hits.scoreDocs){
 			Document doc=is.doc(scoreDoc.doc);
 //			System.out.println(doc.get("contents"));
@@ -51,9 +51,9 @@ public class Searcher {
 	}
 	
 	public static void main(String[] args) {
-		//Ë÷Òı´æ·ÅÂ·¾¶
+		//ç´¢å¼•å­˜æ”¾è·¯å¾„
 		String indexDir="C:\\Users\\SuperTayson\\Desktop\\Bibuying\\DataIndex";
-		//²éÑ¯×Ö¶Î
+		//æŸ¥è¯¢å­—æ®µ
 		String q=search1;
 		try {
 			search(indexDir,q);

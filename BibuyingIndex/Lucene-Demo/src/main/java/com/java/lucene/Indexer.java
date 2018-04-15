@@ -16,21 +16,20 @@ import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 /**
- * ´´½¨LuceneË÷ÒıµÄÀà
+ * åˆ›å»ºLuceneç´¢å¼•çš„ç±»
  * @author Administrator
- *
  */
 public class Indexer {
-	// Ğ´Ë÷ÒıÊµÀı
+	// å†™ç´¢å¼•å®ä¾‹
 	private IndexWriter writer; 
 	
 	/**
-	 * ¹¹Ôì·½·¨ 
-	 * ÊµÀı»¯IndexWriter
+	 * æ„é€ æ–¹æ³• 
+	 * å®ä¾‹åŒ–IndexWriter
 	 */
 	public Indexer(String indexDir)throws Exception{
 		Directory dir=FSDirectory.open(Paths.get(indexDir));
-		// ±ê×¼·Ö´ÊÆ÷
+		// æ ‡å‡†åˆ†è¯å™¨
 		Analyzer analyzer=new StandardAnalyzer(); 
 		IndexWriterConfig iwc=new IndexWriterConfig(analyzer);
 		writer=new IndexWriter(dir, iwc);
@@ -41,8 +40,8 @@ public class Indexer {
     }
 
     /**
-	 * ¹Ø±ÕĞ´Ë÷Òı
-	 * Ò²ĞèÒªÊÍ·Å×ÊÔ´
+	 * å…³é—­å†™ç´¢å¼•
+	 * ä¹Ÿéœ€è¦é‡Šæ”¾èµ„æº
 	 * @throws Exception
 	 */
 	public void close()throws Exception{
@@ -50,33 +49,33 @@ public class Indexer {
 	}
 	
 	/**
-	 * Ë÷ÒıÖ¸¶¨Ä¿Â¼µÄËùÓĞÎÄ¼ş
-	 * dataDir  ĞèÒª½øĞĞË÷ÒıµÄÄ¿Â¼
+	 * ç´¢å¼•æŒ‡å®šç›®å½•çš„æ‰€æœ‰æ–‡ä»¶
+	 * dataDir  éœ€è¦è¿›è¡Œç´¢å¼•çš„ç›®å½•
 	 */
 	public int index(String dataDir)throws Exception{
-		//±éÀúË÷ÒıÄ¿Â¼ÏÂµÄËùÓĞÎÄ¼ş
+		//éå†ç´¢å¼•ç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶
 		File []files=new File(dataDir).listFiles();
 		for(File f:files){
 			indexFile(f);
 		}
-		//·µ»ØË÷ÒıµÄÎÄ¼şÊıÁ¿
+		//è¿”å›ç´¢å¼•çš„æ–‡ä»¶æ•°é‡
 		return writer.numDocs();
 	}
 
 	/**
-	 * Ë÷ÒıÖ¸¶¨ÎÄ¼ş
+	 * ç´¢å¼•æŒ‡å®šæ–‡ä»¶
 	 * @param f
 	 */
 	private void indexFile(File f) throws Exception{
-		System.out.println("Ë÷ÒıÎÄ¼ş£º"+f.getCanonicalPath());
-		//ÕâÀïÓĞÒ»¸ö¸ÅÄî£ºË÷ÒıµÄÊ±ºò£¬Ëü»áÏñÊı¾İÀïĞĞºÍÁĞÒ»Ñù
-		//Ò»ĞĞ¡¢Ò»ĞĞ£¬ÕâÀïÒ»ĞĞ¾ÍÊÇÒ»¸öDocument£¬Ò»¸öÎÄµµ£¬ÎÄµµÀïÓÖÓĞÁĞ
+		System.out.println("ç´¢å¼•æ–‡ä»¶ï¼š"+f.getCanonicalPath());
+		//è¿™é‡Œæœ‰ä¸€ä¸ªæ¦‚å¿µï¼šç´¢å¼•çš„æ—¶å€™ï¼Œå®ƒä¼šåƒæ•°æ®é‡Œè¡Œå’Œåˆ—ä¸€æ ·
+		//ä¸€è¡Œã€ä¸€è¡Œï¼Œè¿™é‡Œä¸€è¡Œå°±æ˜¯ä¸€ä¸ªDocumentï¼Œä¸€ä¸ªæ–‡æ¡£ï¼Œæ–‡æ¡£é‡Œåˆæœ‰åˆ—
 		Document doc=getDocument(f);
 		writer.addDocument(doc);
 	}
 
 	/**
-	 * »ñÈ¡ÎÄµµ£¬ÎÄµµÀïÔÙÉèÖÃÃ¿¸ö×Ö¶Î
+	 * è·å–æ–‡æ¡£ï¼Œæ–‡æ¡£é‡Œå†è®¾ç½®æ¯ä¸ªå­—æ®µ
 	 * @param f
 	 */
 	private Document getDocument(File f)throws Exception {
@@ -106,19 +105,19 @@ public class Indexer {
 
 		doc.add(new TextField("contents",new FileReader(f)));
 		doc.add(new TextField("fileName", f.getName(),Field.Store.YES));
-		//fullPath ÍêÕûÂ·¾¶
+		//fullPath å®Œæ•´è·¯å¾„
 		doc.add(new TextField("fullPath",f.getCanonicalPath(),Field.Store.YES));
 		
 		return doc;
 	}
 	/**
-	 * ²âÊÔ´´½¨Ë÷Òı
+	 * æµ‹è¯•åˆ›å»ºç´¢å¼•
 	 */
 	public static void main(String[] args) {
-		//Ë÷ÒıÊä³öÄ¿Â¼
+		//ç´¢å¼•è¾“å‡ºç›®å½•
 //		String indexDir="E:\\Bibuying";
 		String indexDir="C:\\Users\\SuperTayson\\Desktop\\Bibuying\\DataIndex";
-		//¶ÁÈ¡Êı¾İµÄÂ·¾¶
+		//è¯»å–æ•°æ®çš„è·¯å¾„
 //		String dataDir="E:\\Bibuying\\SongsData";
 		String dataDir="C:\\Users\\SuperTayson\\Desktop\\Bibuying\\SongsData";
 
@@ -138,6 +137,6 @@ public class Indexer {
 			}
 		}
 		long end=System.currentTimeMillis();
-		System.out.println("´´½¨Ë÷Òı£º"+numIndexed+" ¸öÎÄ¼ş »¨·ÑÁË"+(end-start)+" ºÁÃë");
+		System.out.println("åˆ›å»ºç´¢å¼•ï¼š"+numIndexed+" ä¸ªæ–‡ä»¶ èŠ±è´¹äº†"+(end-start)+" æ¯«ç§’");
 	}
 }
