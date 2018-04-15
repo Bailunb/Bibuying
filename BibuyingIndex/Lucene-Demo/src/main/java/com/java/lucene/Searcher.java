@@ -52,7 +52,7 @@ public class Searcher {
 	
 	public static void main(String[] args) {
 		//索引存放路径
-		String indexDir="C:\\Users\\SuperTayson\\Desktop\\Bibuying\\DataIndex";
+		String indexDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/DataIndex";
 		//查询字段
 		String q=search1;
 		try {
@@ -60,6 +60,18 @@ public class Searcher {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public void run(){
+		//索引存放路径
+		String indexDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/DataIndex";
+		//查询字段
+		String q=search1;
+		try {
+			search(indexDir,q);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 
 
