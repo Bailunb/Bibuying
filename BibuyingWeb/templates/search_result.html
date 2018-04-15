@@ -3,17 +3,22 @@
 {% block title %}搜索结果{% endblock %}
 
 {% block content %}
+<section id="one" class="wrapper style2 special">
+    <header class="major">
+        <h2>Search Results for: <br />
+        {{ words }}</h2>
+    </header>
+</section>
 
 <section id="two" class="wrapper">
     <div class="inner alt">
         {% for song in music %}
             <section class="spotlight">
-
-                    <div class="image image_search"><img src={{ song.pic_url }} alt="" /></div>
+                <div class="image image_search"><img src={{ song.pic_url }} alt="" /></div>
                 <div class="content">
-                        <a href={{ song.detail_url }}><h3>{{ song.song_name }}</h3></a>
-                        <p>{{ song.song_lyric }}</p>
-                    </div>
+                    <a href={{ song.detail_url }}><h3>{{ song.song_name }}</h3></a>
+                    <p>{{ song.song_lyric }}</p>
+                </div>
             </section>
         {% endfor %}
     </div>

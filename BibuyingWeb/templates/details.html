@@ -6,12 +6,12 @@
 {% block content %}
     <div class="content1">
     <div class="left">
-        <span class="image1"><img src={{ pic_url }} alt=""  height="200" width="200"></span>
+        <span class="image1"><img src={{ info.pic_url }} alt=""  height="200" width="200"></span>
 
     </div>
         <div class="right">
             <section>
-        <h5>{{ song_name }}</h5>
+        <h2>{{ info.song_name }}</h2>
 
         <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src={{ play_src }}></iframe>
 

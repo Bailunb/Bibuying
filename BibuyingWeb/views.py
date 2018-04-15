@@ -1,7 +1,4 @@
 from django.shortcuts import render
-
-# Create your views here.
-
 import json
 
 
@@ -10,8 +7,8 @@ def index(request):
 
 
 def search_result(request):
-	words = request.GET['keywords']
-	# print(words)
+	words = request.GET['words']
+	print('words = ', words)
 	# add queries here
 	# : music_idx.query(words) # this operation edit 'search_result.txt'
 
@@ -29,8 +26,6 @@ def search_result(request):
 def details(request):
 	song_id = request.GET['song_id']
 	info = json.load(open('SongsData/%s.json' % str(song_id), 'rb'))
-	song_name = info['song_name']
 	song_lyric = info['song_lyric'].split('\n')
-	pic_url = info['pic_url']
 	play_src = "//music.163.com/outchain/player?type=2&id=%s&auto=0&height=66" % song_id
 	return render(request, 'details.html', locals())
