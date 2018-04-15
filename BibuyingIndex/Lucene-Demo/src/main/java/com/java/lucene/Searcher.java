@@ -17,64 +17,38 @@ import org.apache.lucene.store.FSDirectory;
 
 public class Searcher {
 
-    static String search1="杜";
-
-    public void fun2(String x){
-        search1=x;
-    }
-
-	public static void search(String indexDir,String q)throws Exception{
-		Directory dir=FSDirectory.open(Paths.get(indexDir));
-		//创建索引读取器
+	public static void search(String indexDir, String q)throws Exception{
+		Directory dir = FSDirectory.open(Paths.get(indexDir));
 		IndexReader reader=DirectoryReader.open(dir);
-		//创建索引查询器
 		IndexSearcher is=new IndexSearcher(reader);
-		// 标准分词器
-		Analyzer analyzer=new StandardAnalyzer(); 
-		//开始查询解析
+		Analyzer analyzer=new StandardAnalyzer();
 		QueryParser parser=new QueryParser("contents", analyzer);
 		Query query=parser.parse(q);
 		
 		long start=System.currentTimeMillis();
 		TopDocs hits=is.search(query, 10);
 		long end=System.currentTimeMillis();
-		System.out.println("匹配 "+q+" ，总共花费"+(end-start)+"毫秒"+"查询到"+hits.totalHits+"个记录");
+		String out = String.format("Match %s, Time cost: %d ms, Get cnt = %d", q, end-start, hits.totalHits);
+		System.out.println(out);
+		//System.out.println("Match "+q+" ，Time Cost: " + (end-start) + "ms"+"查询到"+hits.totalHits+"个记录");
 		for(ScoreDoc scoreDoc:hits.scoreDocs){
 			Document doc=is.doc(scoreDoc.doc);
-//			System.out.println(doc.get("contents"));
 			System.out.println(doc.get("fileName"));
-//			System.out.println(doc.get("song_name"));
-//			System.out.println(doc.get("artist_name"));
-//			System.out.println(doc.get("song_name"));
 		}
 		reader.close();
 	}
-	
-	public static void main(String[] args) {
 
-		//索引存放路径
-		String indexDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/DataIndex";
+	public static void run(String words){
+		//String path = System.getProperty("user.dir");
+		//String indexDir = path + "/DataIndex";
+		String indexDir = "/home/cww97/文档/Bibuying/BibuyingIndex/Lucene-Demo/DataIndex";
+
+		System.out.println("fuck ---------> " + indexDir);
 		//查询字段
-		String q=search1;
 		try {
-			search(indexDir,q);
+			search(indexDir, words);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	public void run(){
-		//�������·��
-		String indexDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/DataIndex";
-		//��ѯ�ֶ�
-		String q=search1;
-		try {
-			search(indexDir,q);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-
-
 }

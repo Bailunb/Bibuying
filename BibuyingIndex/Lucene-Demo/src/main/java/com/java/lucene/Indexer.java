@@ -20,6 +20,8 @@ import org.apache.lucene.store.FSDirectory;
  * @author Administrator
  */
 public class Indexer {
+
+
 	// 写索引实例
 	private IndexWriter writer; 
 	
@@ -81,25 +83,6 @@ public class Indexer {
 	private Document getDocument(File f)throws Exception {
 		Document doc=new Document();
 		System.out.println("hre222   ");
-//		JSON json2 = net.sf.json.JSONSerializer.toJSON(f);
-
-//		FileReader fr=new FileReader(f);
-//		int ch = 0;
-//		String f1="";
-//		while((ch = fr.read()) != -1){
-//			f1+=(char)ch;
-//		}
-
-//		System.out.println(f1);
-//		System.out.println(f1.indexOf("{"));
-//		String  sub=f1.substring(f1.indexOf("{"));
-//		JSONObject jso = JSONObject.fromObject(sub);
-//		System.out.println("hre111   ");
-//		System.out.println("hre   "+jso.getString("song_name"));
-//
-//		doc.add(new TextField("song_name", jso.getString("song_name"), Field.Store.YES));
-//		doc.add(new TextField("artist_name", jso.getString("artist_name"),Field.Store.YES));
-//		doc.add(new TextField("song_lyric", jso.getString("song_lyric"),Field.Store.YES));
 
 		FileReader fr=new FileReader(f);
 
@@ -114,12 +97,9 @@ public class Indexer {
 	 * 测试创建索引
 	 */
 	public static void main(String[] args) {
-		//�������Ŀ¼
-		//		String indexDir="E:\\Bibuying";
-		String indexDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/DataIndex";
-		//��ȡ���ݵ�·��
-//		String dataDir="E:\\Bibuying\\SongsData";
-		String dataDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/SongsData";
+		String path = System.getProperty("user.dir");
+		String indexDir = path + "/DataIndex";
+		String dataDir="/home/cww97/文档/Bibuying/SongsData";
 
 		Indexer indexer=null;
 		int numIndexed=0;
@@ -145,12 +125,9 @@ public class Indexer {
 
 
 	public void run(){
-
-//		String indexDir="E:\\Bibuying";
-		String indexDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/DataIndex";
-		//��ȡ���ݵ�·��
-//		String dataDir="E:\\Bibuying\\SongsData";
-		String dataDir="/home/supertayson/Desktop/LuceneDemo2.0/Bibuying/SongsData";
+		String path = System.getProperty("user.dir");
+		String indexDir = path + "/DataIndex";
+		String dataDir="/home/cww97/文档/Bibuying/SongsData";
 
 		Indexer indexer=null;
 		int numIndexed=0;
