@@ -1,5 +1,7 @@
 package com.java.lucene;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.nio.file.Paths;
 
 import org.apache.lucene.analysis.Analyzer;
@@ -30,20 +32,24 @@ public class Searcher {
 		long end=System.currentTimeMillis();
 		String out = String.format("Match %s, Time cost: %d ms, Get cnt = %d", q, end-start, hits.totalHits);
 		System.out.println(out);
-		//System.out.println("Match "+q+" ，Time Cost: " + (end-start) + "ms"+"查询到"+hits.totalHits+"个记录");
+		PrintWriter pw = new PrintWriter(new FileWriter("/home/cww97/文档/Bibuying/BibuyingWeb/static/search_result.txt"));
+
+
 		for(ScoreDoc scoreDoc:hits.scoreDocs){
 			Document doc=is.doc(scoreDoc.doc);
+			///home/cww97/文档/Bibuying/BibuyingWeb/static/search_result.txt
+			String filename=doc.get("fileName");
+			pw.write(filename.substring(0,filename.length()-5));
+			pw.write('\n');
 			System.out.println(doc.get("fileName"));
 		}
 		reader.close();
+		pw.close();
 	}
 
 	public static void run(String words){
-		//String path = System.getProperty("user.dir");
-		//String indexDir = path + "/DataIndex";
 		String indexDir = "/home/cww97/文档/Bibuying/BibuyingIndex/Lucene-Demo/DataIndex";
-
-		System.out.println("fuck ---------> " + indexDir);
+		//System.out.println("fuck ---------> " + indexDir);
 		//查询字段
 		try {
 			search(indexDir, words);
