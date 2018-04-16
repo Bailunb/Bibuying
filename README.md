@@ -8,6 +8,8 @@ we are [here](https://github.com/cww97/Bibuying)
 
 华东师范大学 计算机科学与软件工程学院
 
+课程：信息检索
+
 指导老师：[姚俊杰](http://junjie-yao.info/)
 
 - 陈伟文 10152510217
