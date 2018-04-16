@@ -1,6 +1,6 @@
 ﻿# Bibuying
 
-we are [here](https://github.com/BibuyingTeam/Bibuying.git)
+we are [here](https://github.com/cww97/Bibuying)
 
 由于彭先生起了“十度”这个名字
 
@@ -14,13 +14,25 @@ we are [here](https://github.com/BibuyingTeam/Bibuying.git)
 - 徐洪义 10152510235
 - 盛俊杰 10152510150
 
+## 快速开始
+
+贴几张图，我想大部分人是不会翻到最底下看这几张图的
+
+![](doc/pic/web/home.png)
+
+
+![](doc/pic/web/res.png)
+
+
+![](doc/pic/web/details.png)
+
 ## 要求
 
 第一次小组项目作业：
 
-Lucene倒排检索，给定一个不少于10k条的文本数据集，实现创建索引和检索功能。
+`Lucene`倒排检索，给定一个不少于10k条的文本数据集，实现创建索引和检索功能。
 
-加分项：中文语料、检索界面web化， 或借助solr，elastic等工具。
+加分项：中文语料、检索界面`web`化， 或借助`solr`，`elastic`等工具。
 
 Deadline：4月15日。
 
@@ -551,14 +563,9 @@ shutdownJVM()  # shut down JVM
 
 使用python的django框架，
 
-主要文件：
-
-	- BibuyingWeb
-		- templates
-			...
-		- views.py
-
 ### 搜索界面
+
+感谢来自[遥遥姐姐](https://github.com/VivianLyy)的前端支持
 
 ![](doc/pic/web/home.png)
 
@@ -575,6 +582,13 @@ shutdownJVM()  # shut down JVM
 传进一个song_id, 建立页面
 
 ![](doc/pic/web/details.png)
+
+## 再说点什么
+
+可能未解决的问题：如果运行时出现`Json Decode Error`，可以尝试看看日志。
+多半是歌词里有奇奇怪怪的字符，比如双引号或者'\xa0'，
+
+`SongsData/fuck.py`里面有类似的代码，如有兴趣，修改该json, pull request, 感激不尽
 
 ## 参考文献
 
