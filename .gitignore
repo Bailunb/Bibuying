@@ -7,3 +7,7 @@ BibuyingWeb/migrations/__pycache__/
 # cww97
 BibuyingData/web.html
 
+# index
+BibuyingIndex/Lucene-Demo/Lucene-Demo.iml
+*.iml
+*.log
