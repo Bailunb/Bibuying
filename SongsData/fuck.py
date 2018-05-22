@@ -31,8 +31,14 @@ def file_name(path):
 
 
 def main():
-    path = os.getcwd()
-    file_name(path)
+    #path = os.getcwd()
+    #file_name
+    f =open("59877.json","r+",encoding = 'utf-8')
+    s = f.read()
+    s = s.replace("xa0"," ")
+    print(s)
+
+
 
 
 if __name__ == '__main__':
