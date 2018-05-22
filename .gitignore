@@ -11,3 +11,5 @@ BibuyingData/web.html
 BibuyingIndex/Lucene-Demo/Lucene-Demo.iml
 *.iml
 *.log
+.DS_Store
+BibuyingData/.DS_Store
