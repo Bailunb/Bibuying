@@ -2,14 +2,33 @@ import os
 import json
 
 
+def remove_extra_quotes(file):
+    file_data = ''
+    with open(file, "r", encoding="utf-8") as f:
+        line_no = 0
+        for line in f:
+            line_no += 1
+            if line_no == 5:
+                new_line = list(line)
+                # print(new_line)
+                idx = []
+                for i in range(len(line)):
+                    if line[i] == '"': idx.append(i)
+                if len(idx) == 4: continue
+                # print(idx)
+                idx = idx[1:-1]
+                #print(idx)
+                for i in idx:
+                    new_line[i] = '\''
+                line = ''.join(new_line)
+
+            # print(line_no, ' ', line, end='')
+            file_data += line
+    with open(file, "w", encoding="utf-8") as f:
+        f.write(file_data)
+
+
 def alter(file, old_str, new_str):
-    """
-    替换文件中的字符串
-    :param file:文件名
-    :param old_str:就字符串
-    :param new_str:新字符串
-    :return:
-    """
     file_data = ""
     with open(file, "r", encoding="utf-8") as f:
         for line in f:
@@ -25,24 +44,20 @@ def file_name(path):
         cnt = 0
         tot = len(files)
         for file in files:
-            alter(file, "t", "t")
+            if file == 'fuck.py': continue
+            remove_extra_quotes(file)
+            # alter(file, ", \"pic_url", ",\n\"pic_url")
             cnt += 1
             print("%s, (%d/%d)" % (file, cnt, tot))
 
 
 def main():
-    #path = os.getcwd()
-    #file_name
-    f =open("59877.json","r+",encoding = 'utf-8')
-    s = f.read()
-    s = s.replace("xa0"," ")
-    print(s)
-
-
+    path_name = os.getcwd()
+    # print(path_name)
+    file_name(path_name)
 
 
 if __name__ == '__main__':
-    main()
-    # print()
-    # alter("59914.json","t"," ")
-    # info = json.load(open("59914.json", 'r'))
+    # main()
+    remove_extra_quotes('139351.json')
+    pass
