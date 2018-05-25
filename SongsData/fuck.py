@@ -65,7 +65,7 @@ def file_name(path):
             if file == 'fuck.py': continue
             #fuck_pull(file)
             # remove_extra_quotes(file)
-            #alter(file, ", \"pic_url", ",\n\"pic_url")
+            alter(file, 'You"re', 'You\'re')
             cnt += 1
             print("%s, (%d/%d)" % (file, cnt, tot))
 

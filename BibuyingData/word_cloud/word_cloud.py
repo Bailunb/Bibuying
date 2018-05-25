@@ -84,10 +84,10 @@ def give_songs_to_artists():
     songs_path = os.path.dirname(os.getcwd()) + '/SongsData/'
     artists_path = os.path.dirname(os.getcwd()) + '/ArtistsData/'
     song_files = os.listdir(songs_path)
-    for i in range(6000, len(song_files)):
+    for i in range(12000,len(song_files)):
         if song_files[i] == 'fuck.py': continue
         with open("%s%s" % (songs_path, song_files[i]), encoding='utf-8') as f:
-            print('i = %d，%s' % (i, song_files[i]))
+            print('i = %d，https://github.com/cww97/Bibuying/edit/master/SongsData/%s' % (i, song_files[i]))
             song = json.load(f)
         # print(song['song_lyric'])
 
