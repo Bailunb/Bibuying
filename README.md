@@ -32,17 +32,11 @@ Deadline：5.27
 - pycharm (- -)
 - django 1.11
 
-## 前情回顾
+## 快速开始
 
-第一次作业做的搜索首页，搜索结果页和内容详情页面
+![](ArtistsData/周华健0.jpg)
 
-![](doc/pic/web/home.png)
-
-
-![](doc/pic/web/res.png)
-
-
-![](doc/pic/web/details.png)
+![](ArtistsData/周华健.jpg)
 
 ## 爬虫爬呀爬
 

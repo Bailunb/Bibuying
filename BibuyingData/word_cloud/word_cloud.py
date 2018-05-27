@@ -33,7 +33,7 @@ def get_word_cloud(path_name, file_name):
     plt.imshow(wordcloud,interpolation='bilinear')
     plt.axis("off")
     plt.savefig(path_name + file_name + '0.jpg')
-    plt.show()
+    # plt.show()
     plt.close()
 
 
