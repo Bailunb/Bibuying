@@ -20,8 +20,11 @@ from BibuyingWeb import views as web_views
 
 urlpatterns = [
 	url(r'^admin/', admin.site.urls),
+
 	# bibuying
+
 	url(r'^$', web_views.index, name='home'),
 	url(r'^res/$', web_views.search_result, name='search_result'),
-	url(r'^details/$',web_views.details, name='details')
+	url(r'^details/$',web_views.details, name='details'),
+	url(r'^all/$', web_views.all_templates, name='all'),
 ]

@@ -46,7 +46,6 @@ Deadline：5.27
 
 ## 爬虫爬呀爬
 
-
 从[网易云](http://music.163.com/)爬歌手的热门50首歌
 
 分类分别为
@@ -77,7 +76,7 @@ Deadline：5.27
 
 `get_ips.py`：ip代理运营商提供的接口，自己机子被网易云列入黑名单了
 
-### 基本操作
+## 基本操作
 
 定义`get_soup()`爬取html：
 ```python
@@ -92,23 +91,25 @@ def get_soup(web_url):
 	return soup
 ```
 
-### 爬取歌手id
+## 爬取歌手id
 
 以华语男歌手为例，url：`http://music.163.com/discover/artist/cat?id=1001`
 内有标签`<a class="nm nm-icn f-thide s-fc0" href=" /artist?id=3681" title="李志的音乐">`
 
 于是有了下面两行
+
 ```python
 ids = soup.find_all('a', attrs={"class": "nm nm-icn f-thide s-fc0"})
 pattern = re.compile(r'id=\d+')
 ```
+
 找到所有标签然后用正则表达式得到id
 
 结果存在`artist_id.txt`中，如下：
 
 ![artist_id](doc/pic/artist_id.png)
 
-### 根据id获取歌单
+## 根据id获取歌单
 
 直接爬`http://music.163.com/#/artist?id=3681`有个问题，爬出来一堆js脚本，这个动态加载的页面
 
@@ -143,7 +144,7 @@ def get_pic(song_id):
 	return pat.findall(st)[0][12:-2]
 ```
 
-### 歌词
+## 歌词
 
 歌词找了半天，网易云有官方的接口
 
@@ -171,7 +172,7 @@ def get_lyric(song_id):
 		return ''
 ```
 
-### 中文分词
+## 中文分词
 
 将歌词分词，以供后面倒排索引使用。调用一下`jieba`，挺easy的
 
@@ -259,11 +260,6 @@ def get_soup(web_url):
 
 共爬到13k的数据，数量级符合要求了，剩下的便是倒排索引和web展示了
 
-## 数据清洗及一些坑
-
-
-
-
 ## 检索界面
 
 核心功能两个页面，搜索结果目录页和details页，有心情再搞个搜索主页
@@ -290,12 +286,194 @@ def get_soup(web_url):
 
 ![](doc/pic/web/details.png)
 
-## 再说点什么
+## 为歌手生成常用词词云
 
-可能未解决的问题：如果运行时出现`Json Decode Error`，可以尝试看看日志。
-多半是歌词里有奇奇怪怪的字符，比如双引号或者'\xa0'，
+首先看一下效果
 
-`SongsData/fuck.py`里面有类似的代码，如有兴趣，修改该json, pull request, 感激不尽
+![](ArtistsData/汪峰0.jpg)
+
+很容易猜到这个男人喜欢穿皮裤
+
+把所有歌词丢在一起，扔进jieba分词，然后生成词云。接着，计划web展示，但由于~~ddl没时间了~~,~~前端被打死了~~,~~天快亮了想睡觉了~~，种种原因，我们生成了每个歌手的词云图片，然后收工。下面一步一步讲~~我的头是如何秃的~~这些东西是怎么生成出来的。
+
+### 再访网易云
+
+这次爬的数据没有第一次那么多，需要每个歌手的名字，简介，图片，由于~~我很懒~~前面以及花了很多篇幅讲爬虫是怎么爬的，这里我很不要脸的贴代码了
+
+爬一个歌手
+
+```python
+def get_artist_info(cur_id: int, path_name: str):
+    soup = get_soup('http://music.163.com/artist?id=' + str(cur_id))
+    artist_name = soup.find('h2', attrs={'class': 'sname f-thide sname-max'}).string
+
+    # save image for each artist
+    img = requests.get(soup.find('div', attrs={'class': 'n-artist f-cb'}).img['src'])
+    image = Image.open(BytesIO(img.content))
+    image.save('%s%s.jpg' % (path_name, artist_name))
+
+    # save description for the artist
+    txt_file = open('%s%s.txt' % (path_name, artist_name), 'w', encoding='utf-8')
+    txt_file.write(soup.find(attrs={"name": "description"})['content'])
+
+    print(artist_name)
+```
+
+外循环
+
+```python
+def get_artists_info():
+    artists_id = get_artists()
+    path_name = os.path.dirname(os.getcwd()) + '/ArtistsData/'
+    cnt = 0
+    for cur_id in artists_id:
+        get_artist_info(cur_id, path_name)
+        print('cnt = ' + str(cnt))
+        cnt += 1
+    print('done')
+```
+
+### 歌手名字
+
+爬每个歌手的简介和图片，
+
+对于第一次爬的歌曲信息，我再一次发现了一个令人想哭的情况，我的json只存了歌手名字没存歌手id，于是很尴尬的出现了几处歌手id一样名字不一样的尴尬情况，比如
+
+![](doc/pic/word_cloud/band2.png)
+
+爬下来的名字叫"零点"，emmm，还好此类数据不多，手工改一哈就好了
+
+### 引号，上次留下的坑
+
+之前导出的json初始状态是单引号，but这种文件`json.load()`就会炸，于是我写了后面让我在后面欲仙欲死的一句
+```python
+    data.replace('\'', '"')
+```
+于是乎，歌词里有很多单引号，然后，也被你`replace`掉了，
+
+![](doc/pic/word_cloud/no0.jpg)
+
+典型数据有：
+
+    I'm
+    don't
+    let's
+    ...我还可以继续不过我想你懂我意思了
+
+接下来是为期一天的数据清洗，再replace回去，每行保留前三个和最后一个双引号，想法很好，然而，当我跑完如下代码后：
+```python
+def remove_extra_quotes(file):
+    file_data = ''
+    with open(file, "r", encoding="utf-8") as f:
+        line_no = 0
+        for line in f:
+            line_no += 1
+            if line_no == 5:
+                new_line = list(line)
+                # print(new_line)
+                idx = []
+                for i in range(len(line)):
+                    if line[i] == '"': idx.append(i)
+                if len(idx) == 4: continue
+                # print(idx)
+                idx = idx[1:-1]
+                #print(idx)
+                for i in idx:
+                    new_line[i] = '\''
+                line = ''.join(new_line)
+            # print(line_no, ' ', line, end='')
+            file_data += line
+    with open(file, "w", encoding="utf-8") as f:
+        f.write(file_data)
+```
+
+我发现当一行有四个引号的时候，这一行经过这个函数就会消失
+
+![](doc/pic/word_cloud/no1.jpg)
+
+一百个文件里大概四五个有这样的问题的，emm，手动改吧，改到凌晨3点听到一身闷雷，然后下起了雨。
+
+### 组装歌手txt文件
+
+在经历了上面的清洗，终于可以轻松run下面这个函数了
+
+函数名就能看出，把每个json里的歌词append进歌手的txt中
+
+```python
+def give_songs_to_artists():
+    songs_path = os.path.dirname(os.getcwd()) + '/SongsData/'
+    artists_path = os.path.dirname(os.getcwd()) + '/ArtistsData/'
+    song_files = os.listdir(songs_path)
+    for i in range(2698, len(song_files)):
+        if song_files[i] == 'fuck.py': continue
+        print('%s (%d/%d)'% (song_files[i], i, len(song_files)))
+        with open("%s%s" % (songs_path, song_files[i]), encoding='utf-8') as f:
+            song = json.load(f)
+            txt = []
+            with open('%s%s.txt' % (artists_path, song['artist_name']),encoding='utf-8') as f_to:
+                txt += f_to.readlines()
+                txt.append('\n')
+                txt.append(song['song_lyric'])
+            with open('%s%s.txt' % (artists_path, song['artist_name']), 'w', encoding='utf-8') as f_to:
+                # print(txt)
+                f_to.writelines(txt)
+```
+
+###  词云词云
+
+词云就很常规了，翻下自己的~~祖传~~,~~去年写的~~代码，发现自己分词方法很naive，怪不得当时有很多长句子，如下
+
+```python
+def get_word_cloud(path_name, file_name):
+    # get text && get fonts & mask_image
+    text = open(path_name + file_name + '.txt', "r", encoding='utf-8').read()
+    text = ' '.join(jieba.cut(text, cut_all=True))
+    font = os.path.join(os.path.dirname(__file__), "DroidSansFallbackFull.ttf")
+    coloring = np.array(Image.open(path.join(d, path_name + file_name + '.jpg')))
+    # coloring = np.array(Image.open(path.join(d, 'bg.png')))
+    # set stopwords
+    stopwords = set(STOPWORDS)
+    ignore_words = ['作曲', '作词', '制作', '作人', '乐队']
+    ignore_words.append(file_name)
+    for item in ignore_words:
+        stopwords.add(item)
+
+    # Generate a word cloud image
+    wordcloud = WordCloud(background_color="white", font_path=font, stopwords=stopwords,
+                          mask=coloring, random_state=2, margin=1).generate(text)
+    wordcloud = wordcloud.recolor(color_func=ImageColorGenerator(coloring))
+
+    # Display the generated image, the matplotlib way:
+    plt.imshow(wordcloud,interpolation='bilinear')
+    plt.axis("off")
+    plt.savefig(path_name + file_name + '0.jpg')
+    # plt.show()
+    plt.close()
+```
+
+再套一个外循环，一个txt生成一个，完结撒花，文件在`ArtistsData`目录下，歌手名.jpg是爬的歌手图片，作为词云的盖板，当然如果图片是白色的背景效果会很好，如下
+
+![](ArtistsData/周华健0.jpg)
+
+![](ArtistsData/周华健.jpg)
+
+
+大部分歌手的图片背景都不是白色的，于是没有这么好的效果，理论上open_cv做个轮廓识别然后把外面涂白是可以达到这个效果的，但是~~ddl到了要交了~~咱们这次作业的主题是爬虫不是这个是不是,于是，随便放几个有意思的词云结果来展示一些把
+
+费玉清
+
+![](ArtistsData/费玉清0.jpg)
+
+中国人民解放军军乐团
+
+![](ArtistsData/中国人民解放军军乐团0.jpg)
+
+李志
+
+![](ArtistsData/李志0.jpg)
+
+更多彩蛋欢迎前往`Artists`目录自行挖掘
+
 
 ## 参考文献
 
@@ -312,3 +490,5 @@ def get_soup(web_url):
 [ElasticSearch py](https://pypi.python.org/pypi/elasticsearch/2.2.0)
 
 [django教程 | 菜鸟教程](http://www.runoob.com/django/django-tutorial.html)
+
+[python 词云](https://www.jianshu.com/p/e4b24a734ccc)

@@ -1,10 +1,21 @@
 from django.shortcuts import render
 import json
 from BibuyingIndex import main as music_idx
+import os
+
+
+def all_templates(request):
+	return render(request, 'index.html')
 
 
 def index(request):
-	return render(request, 'home.html')
+	artists_path = os.getcwd() + '/ArtistsData/'
+	singers = []
+	for f in os.listdir(artists_path):
+		f = os.path.splitext(f)
+		if f[1] == ".txt":
+			singers.append(f[0])
+	return render(request, 'home.html', locals())
 
 
 def search_result(request):
