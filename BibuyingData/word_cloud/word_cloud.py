@@ -18,7 +18,8 @@ def get_word_cloud(path_name, file_name):
     # coloring = np.array(Image.open(path.join(d, 'bg.png')))
     # set stopwords
     stopwords = set(STOPWORDS)
-    ignore_words = ['作曲', '作词', '制作', '作人', '乐队']
+    ignore_words = ['作曲', '作词', '制作', '作人', '乐队', '录音', '录音室', '录音师',
+                    '工作', '工作室', '编曲', 'Studio', '混音']
     ignore_words.append(file_name)
     for item in ignore_words:
         stopwords.add(item)
@@ -32,7 +33,7 @@ def get_word_cloud(path_name, file_name):
     plt.imshow(wordcloud,interpolation='bilinear')
     plt.axis("off")
     plt.savefig(path_name + file_name + '0.jpg')
-    # plt.show()
+    plt.show()
     plt.close()
 
 
@@ -54,5 +55,7 @@ def main():
 if __name__ == "__main__":
     # artists_path = os.path.dirname(os.path.dirname(os.getcwd())) + '/ArtistsData/'
     # get_word_cloud(artists_path, 'dan.txt')
-    main()
+    # main()
+    artists_path = os.path.dirname(os.path.dirname(os.getcwd())) + '/ArtistsData/'
+    get_word_cloud(artists_path, '周杰伦')
     pass
