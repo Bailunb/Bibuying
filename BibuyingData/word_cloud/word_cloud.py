@@ -53,9 +53,8 @@ def get_artist_name():
     artists = []
     for cur_id in artists_id:
         soup = get_soup('http://music.163.com/artist?id=' + str(cur_id))
-        artists.append({'id': cur_id,
-                        'name': soup.find('h2', attrs={'class': 'sname f-thide sname-max'}).string,
-                        'description': soup.find(attrs={"name": "description"})['content']})
+        artists.append({'id': 'cur_id,ame-max'.string,
+        'description': soup.find(attrs={"name": "description"})['content']})
         print(artists[-1])
     print(artists)
 
