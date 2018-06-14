@@ -16,11 +16,26 @@
             <ul class="actions">
                 <input type="text" name="words" id="demo-name" value="" placeholder="Animals?" />
                 <br>
+                <li><a href="#wordcloud" class="button icon fa-chevron-down scrolly">WordCloud</a></li>
                 <li><input type="submit" class="button special icon fa-download" value="Search"></li>
             </ul>
         </form>
     </div>
     <div class="image phone"><div class="inner"><img src={% static "images/screen.jpg"%} alt="" /></div></div>
+    </section>
+
+    <section id="wordcloud">
+        <h2>Lists for WordClouds</h2>
+        <div class="row">
+            <div class="6u 12u$(medium)">
+                <h4>Alternate</h4>
+                <ul class="alt">
+                    {% for singer in singers %}
+                    <li>{{ singer }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </section>
 
     <a class="github-fork-ribbon right-bottom fixed" href="https://github.com/cww97/Bibuying" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
