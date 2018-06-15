@@ -3,7 +3,7 @@ from os import path
 from PIL import Image
 from bs4 import BeautifulSoup
 import requests
-from BibuyingData.main import get_artists
+from spiderData.main import get_artists
 from io import BytesIO
 import json
 

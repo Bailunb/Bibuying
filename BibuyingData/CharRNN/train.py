@@ -1,8 +1,10 @@
+import elasticsearch as elasticsearch
 import tensorflow as tf
 from read_utils import TextConverter, batch_generator
 from model import CharRNN
 import os
 import codecs
+from elasticsearch import Elasticsearch
 
 FLAGS = tf.flags.FLAGS
 
