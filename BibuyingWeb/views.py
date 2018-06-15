@@ -28,7 +28,7 @@ def search_result(request):
 	music = []
 	for song in songs:
 		file_name = 'SongsData/%s.json' % str(song)
-		print(file_name)
+		# print(file_name)
 		info = json.load(open(file_name, 'r', encoding='utf-8'))
 		info['song_lyric'] = info['song_lyric'][:100] + '...'
 		info['detail_url'] = "/details/?song_id=%s" % song
@@ -43,3 +43,10 @@ def details(request):
 	song_lyric = info['song_lyric'].split('\n')
 	play_src = "//music.163.com/outchain/player?type=2&id=%s&auto=0&height=66" % song_id
 	return render(request, 'details.html', locals())
+
+
+def worldcloud(request):
+	singer = request.GET['singer']
+	pic1 = 'ArtistsData/%s.jpg' % singer
+	pic0 = 'artists/%s0.jpg' % singer
+	return render(request, 'wordcloud.html', locals())

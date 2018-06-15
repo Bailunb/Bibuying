@@ -33,13 +33,13 @@ def main(_):
     start = converter.text_to_arr(FLAGS.start_string)
     arr = model.sample(FLAGS.max_length, start, converter.vocab_size)
     print(converter.arr_to_text(arr))
-    
-    
+
+
 def write_song(catalog=0, word=''):
-    
-    song_script = ['1', '2', '3']
+    song_script = open('sample.txt', encoding='utf-8').read().split('\n')
     return song_script
 
 
 if __name__ == '__main__':
-    tf.app.run()
+    # tf.app.run()
+    write_song()
