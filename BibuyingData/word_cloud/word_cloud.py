@@ -40,7 +40,6 @@ def get_word_cloud(path_name, file_name):
 def main():
     artists_path = os.path.dirname(os.path.dirname(os.getcwd())) + '/ArtistsData/'
     files = os.listdir(artists_path)
-
     cnt = 0
     for f in files:
         f = os.path.splitext(f)

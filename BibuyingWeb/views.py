@@ -24,12 +24,12 @@ def search_result(request):
 	# error here
 
 	music_idx.query(words)  # this operation edit 'search_result.txt'
-	songs = open('BibuyingWeb/static/search_result.txt').read().split()
+	songs = open('BibuyingWeb/static/search_result.txt', encoding='utf-8').read().split()
 	music = []
 	for song in songs:
 		file_name = 'SongsData/%s.json' % str(song)
 		print(file_name)
-		info = json.load(open(file_name, 'r'))
+		info = json.load(open(file_name, 'r', encoding='utf-8'))
 		info['song_lyric'] = info['song_lyric'][:100] + '...'
 		info['detail_url'] = "/details/?song_id=%s" % song
 		music.append(info)
@@ -39,7 +39,7 @@ def search_result(request):
 
 def details(request):
 	song_id = request.GET['song_id']
-	info = json.load(open('SongsData/%s.json' % str(song_id), 'r'))
+	info = json.load(open('SongsData/%s.json' % str(song_id), 'r', encoding='utf-8'))
 	song_lyric = info['song_lyric'].split('\n')
 	play_src = "//music.163.com/outchain/player?type=2&id=%s&auto=0&height=66" % song_id
 	return render(request, 'details.html', locals())

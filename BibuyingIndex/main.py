@@ -1,7 +1,4 @@
 
-import os.path
-
-
 def query(words):
     pass
 
