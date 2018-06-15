@@ -36,7 +36,8 @@ def main(_):
 
 
 def write_song(catalog=0, word=''):
-    song_script = open('sample.txt', encoding='utf-8').read().split('\n')
+    file_name = 'BibuyingData/CharRNN/sample.txt'
+    song_script = open(file_name, encoding='utf-8').read().split('\n')
     return song_script
 
 

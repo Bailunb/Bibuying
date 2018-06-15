@@ -27,4 +27,5 @@ urlpatterns = [
 	url(r'^details/$',web_views.details, name='details'),
 	url(r'^all/$', web_views.all_templates, name='all'),
 	url(r'^wordcloud/$', web_views.worldcloud, name='wordcloud'),
+	url(r'^write/$', web_views.write_song, name='write'),
 ]
