@@ -4,10 +4,35 @@
 
 {% block content %}
 
-    <h1> {{ singer }}</h1>
+
+    <div class="pic-wrapper">
+    <h1 class="title"> {{ singer }}</h1>
     <br>
-    <img src={% static pic1 %} />
+    <img src={% static pic1 %} class="pic"/>
     <br>
-    <img src={% static pic0 %} />
+    <img src={% static pic0 %} class="pic"/>
+    </div>
+    <style type="text/css">
+
+    .title{
+        margin: 20px;
+        text-align: center;
+        font-size: 2em;
+        letter-spacing: 0.1em;
+    }
+
+    .pic-wrapper{
+        padding: 20px 0;
+        width: 700px;
+        margin: 20px auto;
+        background-color: #ffffff;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .pic-wrapper .pic{
+        display: inline-block;
+    }
+    </style>
 
 {% endblock %}

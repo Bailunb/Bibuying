@@ -25,10 +25,10 @@
     <form action="/write/" method="GET">
         <div class="image phone">
             <div class="inner">
-                <input type="text" name="words" id="demo-name" placeholder="write a song?" />
+                <input type="text" name="words" id="write-name" placeholder="write a song?" />
                 <img src={% static "images/screen.jpg"%} />
 
-                <div class="select-wrapper">
+                <div class="select-wrapper category-wrapper">
                     <select name="demo-category" id="demo-category">
                         <option value="">- Category -</option>
                         <option value="1">Manufacturing</option>
@@ -39,19 +39,19 @@
                 </div>
 
             </div>
-            <input type="submit" class="button special icon fa-download" value="Write">
+            <input type="submit" id="write-button" class="button special icon fa-download" value="">
         </div>
     </form>
 
     </section>
 
     <section id="wordcloud">
-        <h2>Lists for WordClouds</h2>
+        <h2 class="singer-list-head">Lists for WordClouds</h2>
         <div class="row">
-            <div class="6u 12u$(medium)">
+            <div class="6u 12u$(medium) singer-list-wrap">
                 <ul class="alt">
                     {% for singer in singers %}
-                        <li> <a href="wordcloud/?singer={{ singer }}"> {{ singer }} </a> </li>
+                        <li class="singer-item"> <a href="wordcloud/?singer={{ singer }}"> {{ singer }} </a> </li>
                     {% endfor %}
                 </ul>
             </div>
@@ -59,4 +59,62 @@
     </section>
 
     <a class="github-fork-ribbon right-bottom fixed" href="https://github.com/cww97/Bibuying" data-ribbon="Fork me on GitHub" title="Fork me on GitHub">Fork me on GitHub</a>
+
+    <style type="text/css">
+
+    .row{
+        width: 100%;
+    }
+
+    .singer-list-head{
+        text-align: center;
+    }
+
+    .singer-list-wrap{
+        display: block;
+        position: absolute;
+        left: 50%;
+        width: 900px;
+        margin-left: -450px;
+    }
+
+    .singer-item{
+        display: inline-block;
+        width:30%;
+        text-align: center;
+    }
+
+    #write-name{
+        z-index: 9999;
+        position: absolute;
+        top:20%;
+        left: 10%;
+        width: 80%;
+        background-color: transparent;
+    }
+
+    .category-wrapper{
+        z-index: 9999;
+        position: absolute;
+        top:40%;
+        left: 10%;
+        width: 80%;
+    }
+
+    #demo-category{
+        background-color: transparent;
+    }
+
+    #write-button{
+        width: 2em;
+        height: 2em;
+        position: absolute;
+        left: 50%;
+        bottom: 10px;
+        margin-left: -1em;
+        padding: 0;
+        border-radius: 50%;
+        background-color: transparent !important;
+    }
+</style>
 {% endblock %}
