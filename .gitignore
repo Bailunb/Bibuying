@@ -13,3 +13,6 @@ BibuyingIndex/Lucene-Demo/Lucene-Demo.iml
 *.log
 .DS_Store
 BibuyingData/.DS_Store
+
+#model
+BibuyingData/CharRNN/model
