@@ -34,9 +34,9 @@ Deadline：5.27
 
 ## 快速开始
 
-![](ArtistsData/周华健0.jpg)
+![](doc/pic/word_cloud/周华健0.jpg)
 
-![](ArtistsData/周华健.jpg)
+![](doc/pic/word_cloud/周华健.jpg)
 
 ## 爬虫爬呀爬
 
@@ -447,24 +447,25 @@ def get_word_cloud(path_name, file_name):
 
 再套一个外循环，一个txt生成一个，完结撒花，文件在`ArtistsData`目录下，歌手名.jpg是爬的歌手图片，作为词云的盖板，当然如果图片是白色的背景效果会很好，如下
 
-![](ArtistsData/周华健0.jpg)
+![](doc/pic/word_cloud/周华健0.jpg)
 
-![](ArtistsData/周华健.jpg)
+![](doc/pic/word_cloud/周华健.jpg)
 
 
 大部分歌手的图片背景都不是白色的，于是没有这么好的效果，理论上open_cv做个轮廓识别然后把外面涂白是可以达到这个效果的，但是~~ddl到了要交了~~咱们这次作业的主题是爬虫不是这个是不是,于是，随便放几个有意思的词云结果来展示一些把
 
 费玉清
 
-![](ArtistsData/费玉清0.jpg)
+
+![](doc/pic/word_cloud/费玉清0.jpg)
 
 中国人民解放军军乐团
 
-![](ArtistsData/中国人民解放军军乐团0.jpg)
+![](doc/pic/word_cloud/中国人民解放军军乐团0.jpg)
 
 李志
 
-![](ArtistsData/李志0.jpg)
+![](doc/pic/word_cloud/李志0.jpg)
 
 更多彩蛋欢迎前往`Artists`目录自行挖掘
 

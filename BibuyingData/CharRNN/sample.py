@@ -41,14 +41,14 @@ tf.flags.DEFINE_integer('max_length', 600, 'max length to generate')
 # def main():
 
 
-def write_song(catalog, word):
-    checkpoint_path='model/%d'%(catalog)
-    converter_path='model/%d/converter.pkl'%(catalog)
+def write_song(catalog, word, global_path=''):
+    catalog = int(catalog)
+    checkpoint_path = '%smodel/%d' % (global_path, catalog)
+    converter_path = '%smodel/%d/converter.pkl' % (global_path, catalog)
     # FLAGS.start_string = FLAGS.start_string.encode('utf-8').decode('utf-8')
     converter = TextConverter(filename=converter_path)
     if os.path.isdir(checkpoint_path):
-        checkpoint_path =\
-            tf.train.latest_checkpoint(checkpoint_path)
+        checkpoint_path = tf.train.latest_checkpoint(checkpoint_path)
 
     model = CharRNN(converter.vocab_size, sampling=True,
                     lstm_size=FLAGS.lstm_size, num_layers=FLAGS.num_layers,
@@ -59,19 +59,19 @@ def write_song(catalog, word):
 
     start = converter.text_to_arr(word)
     arr = model.sample(FLAGS.max_length, start, converter.vocab_size)
-    print(converter.arr_to_text(arr))
-    song_script=converter.arr_to_text(arr)
+    song_script = converter.arr_to_text(arr)
+    return song_script.split('\n')
 
 
-
-def write_song(catalog=0, word=''):
+def write_song_0(catalog=0, word=''):
     file_name = 'BibuyingData/CharRNN/sample.txt'
     song_script = open(file_name, encoding='utf-8').read().split('\n')
     return song_script
 
 
 if __name__ == '__main__':
-    start_word='宝贝'
-    Category=5
-    song_script=tf.app.run(write_song(Category,start_word))
+    start_word = '宝贝'
+    Category = 1
+    # song_script = tf.app.run(write_song(Category,start_word))
+    write_song(Category, start_word)
     # write_song()

@@ -20,13 +20,13 @@ we are [here](https://github.com/cww97/Bibuying)
 
 贴几张图，我想大部分人是不会翻到最底下看这几张图的
 
-![](doc/pic/web/home.png)
+![](pic/web/home.png)
 
 
-![](doc/pic/web/res.png)
+![](pic/web/res.png)
 
 
-![](doc/pic/web/details.png)
+![](pic/web/details.png)
 
 ## 要求
 
@@ -108,7 +108,7 @@ pattern = re.compile(r'id=\d+')
 
 结果存在`artist_id.txt`中，如下：
 
-![artist_id](doc/pic/artist_id.png)
+![artist_id](pic/artist_id.png)
 
 ### 根据id获取歌单
 
@@ -116,7 +116,7 @@ pattern = re.compile(r'id=\d+')
 
 知乎上[这里](https://www.zhihu.com/question/21471960)发现个技巧，右击检查元素发现
 
-![](doc/pic/song_id.png)
+![](pic/song_id.png)
 
 这里有个请求可以得到歌单，其header如下
 
@@ -153,7 +153,7 @@ def get_pic(song_id):
 
 直接get会得到这样一坨
 
-![lyric](doc/pic/lyric.png)
+![lyric](pic/lyric.png)
 
 需要正则表达式一通操作，如下
 
@@ -192,7 +192,7 @@ def get_words(lyric):
 歌手名，歌名在歌手歌单页面可以爬到
 网易云有外链播放器功能，我想web搭建的时候，可以嵌一个
 
-![](doc/pic/player.png)
+![](pic/player.png)
 
 ```
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 
@@ -245,7 +245,7 @@ def get_soup(web_url):
 
 多了一个`get_ips.py`，ip的各种验证之类
 
-![](doc/pic/ips.png)
+![](pic/ips.png)
 
 ### 数据完成
 
@@ -253,11 +253,11 @@ def get_soup(web_url):
 
 终于在凌晨看见了如下输出
 
-![](doc/pic/over.png)
+![](pic/over.png)
 
 300个歌手，应该是0到299，我还刻意写了`for i in range(0, 301)`，蠢了蠢了
 
-![](doc/pic/songdata.png)
+![](pic/songdata.png)
 
 共爬到13k的数据，数量级符合要求了，剩下的便是倒排索引和web展示了
 
@@ -269,7 +269,7 @@ def get_soup(web_url):
 由于前面使用的py进行操作，以及网页的搭建也是python,而倒排索引部分是使用java进行实现。所以之后还有python通过JPype调用java函数的步骤。
 倒排索引的原理已经十分清楚，就不在这里多加阐述，主要展示我们如何实现。
 
-![](doc/pic/lucene.png)
+![](pic/index/lucene.png)
 
 
 （1）创建索引
@@ -363,25 +363,25 @@ public static void main(String[] args) {
 
 外部添加的Lucene支持相关jar包：
 
-![](doc/pic/index/ext-jar.png)
+![](pic/index/ext-jar.png)
 
 
 创建索引的结果：
 
 
-![](doc/pic/index/result1.png)
+![](pic/index/result1.png)
 
 如图，一共检索了13481个文件并创建了索引，花时25.581秒。
 
 
 成功创建的索引文件：
 
-![](doc/pic/index/result2.png)
+![](pic/index/result2.png)
 
 
 （2）索引检索
 
-![](doc/pic/index/search.png)
+![](pic/index/search.png)
 
 通过第一步创建好了索引，那么接下来只需要将所要搜素的内容在索引文件中进行查找匹配即可。
 
@@ -434,7 +434,7 @@ public static void main(String[] args) {
 
 索引结果：
 
-![](doc/pic/result3.png)
+![](pic/index/result3.png)
 
 如图，这里根据关键字索引得到了对应文件的文件名，用于之后网页的结果显示。
 
@@ -569,7 +569,7 @@ shutdownJVM()  # shut down JVM
 
 感谢来自[遥遥姐姐](https://github.com/VivianLyy)的前端支持
 
-![](doc/pic/web/home.png)
+![](pic/web/home.png)
 
 ### 搜索结果页面
 
@@ -577,13 +577,13 @@ shutdownJVM()  # shut down JVM
 
 后面java索引直接操作`search_result.txt`，当然直接返回一个`list`是最优雅的，等调通了再做优化吧。
 
-![](doc/pic/web/res.png)
+![](pic/web/res.png)
 
 ### 详情页面
 
 传进一个song_id, 建立页面
 
-![](doc/pic/web/details.png)
+![](pic/web/details.png)
 
 ## 再说点什么
 

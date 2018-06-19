@@ -56,5 +56,6 @@ def worldcloud(request):
 def write_song(request):
 	word = request.GET['words']
 	catalog = request.GET['demo-category']
-	script = get_song(catalog, word)
+	script = get_song(catalog, word, 'BibuyingData/CharRNN/')
+	print(script)
 	return render(request, 'write.html', locals())
