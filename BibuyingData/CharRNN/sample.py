@@ -1,3 +1,4 @@
+import sys
 import tensorflow as tf
 from read_utils import TextConverter
 from model import CharRNN
@@ -65,6 +66,6 @@ def write_song(catalog, word):
 
 if __name__ == '__main__':
     start_word='闻到'
-    Category=4
+    Category=00
     song_script=tf.app.run(write_song(Category,start_word))
     # write_song()

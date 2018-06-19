@@ -123,12 +123,23 @@ def categorySinger():
                     print(content1,file=f9)
                     break
         f9.close()
+def lyricsSum():
+    path = "../CharRNN/data"  # 文件夹目录
+    files = os.listdir(path)  # 得到文件夹下的所有文件名称
+    f10 = open('Sum.txt', 'a+', encoding='UTF-8')
+    count=[]
+    for file in files:  # 遍历文件夹
+        fileName=os.path.splitext(file)[0]
+        if not os.path.isdir(file) and os.path.splitext(file)[1] == '.txt' and '_New' in fileName :  # 判断是否是文件夹，不是文件夹才打开
+            content1=read_from_file(path+"/"+file)
+            print(content1,file=f10)
+    f10.close()
 
 if __name__ == '__main__':
     # lyricsBlending()
     # delblankline()
-    categorySinger()
-
+    # categorySinger()
+    lyricsSum()
 
 
 #     f3=open('kmeans_labels.txt', 'w', encoding='UTF-8')
