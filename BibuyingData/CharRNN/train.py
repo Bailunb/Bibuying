@@ -8,7 +8,7 @@ import codecs
 
 FLAGS = tf.flags.FLAGS
 
-tf.flags.DEFINE_string('name', 'Sum', 'name of the model')#gai1
+tf.flags.DEFINE_string('name', '5', 'name of the model')#gai1
 tf.flags.DEFINE_integer('num_seqs', 100, 'number of seqs in one batch')
 tf.flags.DEFINE_integer('num_steps', 20, 'length of one seq')
 tf.flags.DEFINE_integer('lstm_size', 128, 'size of hidden state of lstm')
@@ -17,7 +17,7 @@ tf.flags.DEFINE_boolean('use_embedding', True, 'whether to use embedding')
 tf.flags.DEFINE_integer('embedding_size', 128, 'size of embedding')
 tf.flags.DEFINE_float('learning_rate', 0.01, 'learning_rate')
 tf.flags.DEFINE_float('train_keep_prob', 0.5, 'dropout rate during training')
-tf.flags.DEFINE_string('input_file', 'data/Sum.txt', 'utf8 encoded text file')#gai2
+tf.flags.DEFINE_string('input_file', 'data/5_New.txt', 'utf8 encoded text file')#gai2
 tf.flags.DEFINE_integer('max_steps', 5000, 'max steps to train')
 tf.flags.DEFINE_integer('save_every_n', 1000, 'save the model every n steps')
 tf.flags.DEFINE_integer('log_every_n', 10, 'log to the screen every n steps')

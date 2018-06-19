@@ -65,7 +65,7 @@ def write_song(catalog, word):
 
 
 if __name__ == '__main__':
-    start_word='闻到'
-    Category=00
+    start_word='宝贝'
+    Category=5
     song_script=tf.app.run(write_song(Category,start_word))
     # write_song()
