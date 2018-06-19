@@ -21,7 +21,28 @@
             </ul>
         </form>
     </div>
-    <div class="image phone"><div class="inner"><img src={% static "images/screen.jpg"%} alt="" /></div></div>
+
+    <form action="/write/" method="GET">
+        <div class="image phone">
+            <div class="inner">
+                <input type="text" name="words" id="demo-name" placeholder="write a song?" />
+                <img src={% static "images/screen.jpg"%} />
+
+                <div class="select-wrapper">
+                    <select name="demo-category" id="demo-category">
+                        <option value="">- Category -</option>
+                        <option value="1">Manufacturing</option>
+                        <option value="1">Shipping</option>
+                        <option value="1">Administration</option>
+                        <option value="1">Human Resources</option>
+                    </select>
+                </div>
+
+            </div>
+            <input type="submit" class="button special icon fa-download" value="Write">
+        </div>
+    </form>
+
     </section>
 
     <section id="wordcloud">
@@ -30,7 +51,7 @@
             <div class="6u 12u$(medium)">
                 <ul class="alt">
                     {% for singer in singers %}
-                        <li> <a href="/wordcloud?singer={{ singer }}"> {{ singer }} </a> </li>
+                        <li> <a href="wordcloud/?singer={{ singer }}"> {{ singer }} </a> </li>
                     {% endfor %}
                 </ul>
             </div>

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 import json
-from BibuyingIndex import main as music_idx
+from BibuyingIndex import Trynm as music_idx
 import os
+from BibuyingData.CharRNN.sample import write_song as get_song
 
 
 def all_templates(request):
@@ -47,6 +48,13 @@ def details(request):
 
 def worldcloud(request):
 	singer = request.GET['singer']
-	pic1 = 'ArtistsData/%s.jpg' % singer
-	pic0 = 'artists/%s0.jpg' % singer
+	pic1 = 'images/artists/%s.jpg' % singer
+	pic0 = 'images/artists/%s0.jpg' % singer
 	return render(request, 'wordcloud.html', locals())
+
+
+def write_song(request):
+	word = request.GET['words']
+	catalog = request.GET['demo-category']
+	script = get_song(catalog, word)
+	return render(request, 'write.html', locals())

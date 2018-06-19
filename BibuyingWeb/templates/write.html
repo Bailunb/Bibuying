@@ -5,5 +5,9 @@
 
 {% block content %}
 
+    {% for line in script %}
+        {{ line }}
+        <br>
+    {% endfor %}
 
 {% endblock %}

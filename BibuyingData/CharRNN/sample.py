@@ -61,6 +61,12 @@ def write_song(catalog, word):
     arr = model.sample(FLAGS.max_length, start, converter.vocab_size)
     print(converter.arr_to_text(arr))
     song_script=converter.arr_to_text(arr)
+
+
+
+def write_song(catalog=0, word=''):
+    file_name = 'BibuyingData/CharRNN/sample.txt'
+    song_script = open(file_name, encoding='utf-8').read().split('\n')
     return song_script
 
 
