@@ -5,9 +5,38 @@
 
 {% block content %}
 
+    <div class="line-wrapper">
+    <h2 class="title">{{ word }}</h2>
+    <p class="sub-title">{{ catalog }}</p>
+
     {% for line in script %}
         {{ line }}
         <br>
     {% endfor %}
+    </div>
 
+
+    <style type="text/css">
+    .line-wrapper{
+        padding: 10px;
+        width: 900px;
+        margin: 10px auto;
+        border-radius: 10px;
+        background-color: #ffffff;
+        text-align: center;
+        line-height: 1.8em;
+    }
+
+    .title{
+        margin: 0;
+    }
+
+    .sub-title{
+        margin: 0 auto;
+        margin-bottom: 20px;
+        width: 40%;
+        text-align: right;
+    }
+    </style>
 {% endblock %}
+

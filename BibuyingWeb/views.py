@@ -10,6 +10,17 @@ def all_templates(request):
 
 
 def index(request):
+	category = ({'idx': 0, 'name': '0'},
+	            {'idx': 1, 'name': '1'},
+	            {'idx': 2, 'name': '2'},
+	            {'idx': 3, 'name': '3'},
+	            {'idx': 4, 'name': '4'},
+	            {'idx': 5, 'name': '5'},
+	            {'idx': 6, 'name': '6'},
+	            {'idx': 7, 'name': '7'},
+	            {'idx': 8, 'name': '8'},
+	            {'idx': 9, 'name': '9'},)
+	# for word cloud
 	artists_path = os.getcwd() + '/ArtistsData/'
 	singers = []
 	for f in os.listdir(artists_path):
@@ -55,7 +66,8 @@ def worldcloud(request):
 
 def write_song(request):
 	word = request.GET['words']
+	if word == '': word = u'无题'
 	catalog = request.GET['demo-category']
 	script = get_song(catalog, word, 'BibuyingData/CharRNN/')
-	print(script)
+	# print(script)
 	return render(request, 'write.html', locals())
