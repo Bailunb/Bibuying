@@ -10,16 +10,16 @@ def all_templates(request):
 
 
 def index(request):
-	category = ({'idx': 0, 'name': '0'},
-	            {'idx': 1, 'name': '1'},
-	            {'idx': 2, 'name': '2'},
-	            {'idx': 3, 'name': '3'},
-	            {'idx': 4, 'name': '4'},
-	            {'idx': 5, 'name': '5'},
-	            {'idx': 6, 'name': '6'},
-	            {'idx': 7, 'name': '7'},
-	            {'idx': 8, 'name': '8'},
-	            {'idx': 9, 'name': '9'},)
+	category = ({'idx': 0, 'name': '民族'},
+	            {'idx': 1, 'name': '年代港乐'},
+	            {'idx': 2, 'name': '未出名'},
+	            {'idx': 3, 'name': '年轻一代'},
+	            {'idx': 4, 'name': '音乐节'},
+	            {'idx': 5, 'name': '民谣'},
+	            {'idx': 6, 'name': '朗朗上口'},
+	            {'idx': 7, 'name': '年轻港乐'},
+	            {'idx': 8, 'name': '最热门'},
+	            {'idx': 9, 'name': '卖萌'},)
 	# for word cloud
 	artists_path = os.getcwd() + '/ArtistsData/'
 	singers = []
