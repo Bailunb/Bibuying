@@ -14,5 +14,6 @@ BibuyingIndex/Lucene-Demo/Lucene-Demo.iml
 .DS_Store
 BibuyingData/.DS_Store
 
-#model
-BibuyingData/CharRNN/model
+# model
+# BibuyingData/CharRNN/model
+# we need it
