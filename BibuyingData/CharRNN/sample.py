@@ -1,7 +1,7 @@
 import sys
 import tensorflow as tf
-from read_utils import TextConverter
-from model import CharRNN
+from BibuyingData.CharRNN.read_utils import TextConverter
+from BibuyingData.CharRNN.model import CharRNN
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 from IPython import embed
